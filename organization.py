@@ -5,7 +5,9 @@ from typing import List
 import pandas as pd
 
 from config import TABLE_COLUMNS
-from user import DummyUser, User
+from user import DummyUser, SecuritySavvyUser, EasilyDeceivedUser, AverageUser, User
+
+import random
 
 
 class Organization:
@@ -26,9 +28,23 @@ class Organization:
         # 1. import your own user types created in Task 1 from the user.py module
         # 2. change this to populate the organization with your own user types
         # 3. change the distribution from uniform to something a bit more realistic
+        """
+        My organization will be 70% AverageUser, 20% SecuritySavvyUser,
+        5% EasilyDeceivedUser, and 5% DummyUser.
+        """
         users = []
+        user_type_list = ["Average", "SecuritySavvy", "EasilyDeceived", "Dummy"]
         for i in range(self.n_users):
-            users.append(DummyUser())
+            # choose user type according to the distribution defined above
+            random_user_type = random.choices(user_type_list, weights=(70, 20, 5, 5), k=1)
+            if random_user_type == "Average":
+                users.append(AverageUser())
+            elif random_user_type == "SecuritySavvy":
+                users.append(SecuritySavvyUser())
+            elif random_user_type == "EasilyDeceived":
+                users.append(EasilyDeceivedUser())
+            else:
+                users.append(DummyUser())
         return users
 
     def do_training(self) -> None:
