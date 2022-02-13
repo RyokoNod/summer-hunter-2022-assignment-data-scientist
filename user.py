@@ -81,3 +81,52 @@ class DummyUser(User):
         # In your solution, tweak this logic to mimick your chosen user types instead
         # of picking a random simulation outcome
         return random.choice(SIMULATION_OUTCOMES)
+
+class SecuritySavvyUser(User):
+    """User class for the security savvy users."""
+
+    def __init__(self) -> None:
+        """Init the object."""
+        super(SecuritySavvyUser, self).__init__(type="SecuritySavvy")
+
+    def _get_simulation_outcome(self) -> str:
+        """
+        A security savvy user really cares about cybersecurity.
+        These people almost never miss a Hoxhunt training email
+        and can respond to almost all of them accurately.
+        """
+        # 98% success, 1% miss, 1% fail
+        return random.choices(SIMULATION_OUTCOMES, weights=(98, 1, 1))[0]
+
+class EasilyDeceivedUser(User):
+    """User class for the easily deceived users."""
+
+    def __init__(self) -> None:
+        """Init the object."""
+        super(EasilyDeceivedUser, self).__init__(type="EasilyDeceivedUser")
+
+    def _get_simulation_outcome(self) -> str:
+        """
+        An easily deceived user is easily tricked by Hoxhunt training
+        emails. Some of them have already been victims of a real
+        phishing attack. These are people who need to be helped quickly.
+        """
+        # 10% success, 10% miss, 80% fail
+        return random.choices(SIMULATION_OUTCOMES, weights=(10, 10, 80))[0]
+
+class AverageUser(User):
+    """User class for the average users."""
+
+    def __init__(self) -> None:
+        """Init the object."""
+        super(AverageUser, self).__init__(type="AverageUser")
+
+    def _get_simulation_outcome(self) -> str:
+        """
+        An average user knows about phishing emails, but they do not
+        take active part in cybersecurity training. Once they are up
+        to it, they can detect most phishing emails. Sorry Hoxhunt devs,
+        but these are the "average" people I've seen in my life.
+        """
+        # 35% success, 60% miss, 5% fail
+        return random.choices(SIMULATION_OUTCOMES, weights=(35, 60, 5))[0]
