@@ -36,7 +36,7 @@ class Organization:
         user_type_list = ["Average", "SecuritySavvy", "EasilyDeceived", "Dummy"]
         for i in range(self.n_users):
             # choose user type according to the distribution defined above
-            random_user_type = random.choices(user_type_list, weights=(70, 20, 5, 5), k=1)
+            random_user_type = random.choices(user_type_list, weights=(70, 20, 5, 5), k=1)[0]
             if random_user_type == "Average":
                 users.append(AverageUser())
             elif random_user_type == "SecuritySavvy":
