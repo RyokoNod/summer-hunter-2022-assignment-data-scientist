@@ -55,7 +55,6 @@ def get_data_with_query() -> tuple:
         dimensions=[
             "user_id",
             "name",
-            "type",
             "COUNT(CASE WHEN outcome = 'SUCCESS' THEN 1 END) AS successes",
             "COUNT(CASE WHEN outcome = 'FAIL' THEN 1 END) AS fails",
             "COUNT(CASE WHEN outcome = 'MISS' THEN 1 END) AS misses",
@@ -64,7 +63,7 @@ def get_data_with_query() -> tuple:
         group_by=["user_id"],
         order_by=["successes DESC"],
     )
-    query_result_usercnt = query_db_to_df(query_params_usercnt, result_columns=["user_id", "name", "type", "successes", "fails", "misses"])
+    query_result_usercnt = query_db_to_df(query_params_usercnt, result_columns=["user_id", "name", "successes", "fails", "misses"])
     query_params_datecnt = QueryParams(
         dimensions=[
             "STRFTIME('%Y-%m-%d', timestamp) AS date",
